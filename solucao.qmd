@@ -1,0 +1,97 @@
+---
+title: "Solução"
+author: "Duvier J. Atuesta"
+format: html
+---
+
+### 1. Preparação do Ambiente
+
+```{r setup, message=FALSE, warning=FALSE}
+# Códigos usados para carregar os pacotes e importar os dados.
+
+library(rio)
+library(tidyverse)
+
+lab <- import("laboratorio.xlsx")
+capsulas <- import("capsulas.xlsx")
+graos <- import("graos.csv")
+mmg <- import("mmg.xlsx")
+
+```
+
+### 2. Análise e Consolidação por Planta
+
+```{r processamento_por_planta}
+# Códigos usados para o processamento dos dados
+
+
+# Resumo graos
+
+graos_resumido <- 
+  graos |> 
+  select(img, length, width) |> 
+  separate_wider_delim(img,
+                       delim = "_",
+                       names = "img",
+                       too_many = "drop") |> 
+  mutate(img = as.numeric(img))
+  
+
+calculos_graos <- graos_resumido |> 
+  group_by(img) |> 
+  summarise(
+    NG = n(),                       
+    CG = mean(length, na.rm = TRUE),
+    LG = mean(width,  na.rm = TRUE),
+    
+  )
+
+calculos_graos <- calculos_graos |> 
+  mutate(img = as.numeric(img))
+
+# Resumo cápsulas
+
+capsulas_resumido <- 
+  capsulas |> 
+  select(img) |> 
+  separate_wider_delim(img,
+                       delim = "_",
+                       names = "img",
+                       too_many = "drop") |> 
+  mutate(img = as.numeric(img)) |> 
+  group_by(img) |> 
+  summarise(
+    NC = n()
+  )
+
+
+# Extracão de ID
+
+lab <- lab |> 
+  rename_with(tolower) |>
+  mutate(img = as.numeric(img))
+
+
+
+dados_unificados <- lab |> 
+  left_join(calculos_graos, by = "img") |> 
+  left_join(capsulas_resumido, by = "img")
+
+```
+
+### 3. Análise e Consolidação por Genótipo
+
+```{r processamento_por_genotipo}
+# Códigos usados para agrupar os dados por genótipo,
+# calcular as médias e juntar com os dados de massa de mil grãos.
+
+
+```
+
+### 4. Exploração e Visualização
+
+Agora...
+
+## Conclusão
+
+Nesta...

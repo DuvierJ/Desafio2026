@@ -1,0 +1,21 @@
+---
+title: "Solução desafio"
+format: html
+---
+
+
+# Pacotes
+```{r}
+library(rio)
+df <- import("laboratorio.xlsx", setclass = "tbl")
+df
+
+```
+
+# Exploração
+
+## Gráficos
+```{r}
+hist(df$MG)
+```
+
