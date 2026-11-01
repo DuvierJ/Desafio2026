@@ -43,7 +43,7 @@ website:
             text: "Aula 5 — Seleção e filtragem"
           - href: aula6.qmd
             text: "Aula 6 — Mutação e resumo"
-      - text: Desafio 2026
+      - text: Desafio
         menu:
           - href: desafio_2026.qmd
             text: "Orientações"
