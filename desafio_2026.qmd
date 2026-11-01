@@ -1,16 +1,6 @@
 ---
 title: "Orientações"
-format: 
-  html:
-    toc: true
-    toc-location: left
-    theme: cosmo
-    embed-resources: true
-lang: pt
-editor: source
 ---
-
-![](images/bem-vindo.png)
 
 ## Introdução
 

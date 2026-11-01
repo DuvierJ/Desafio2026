@@ -1,0 +1,89 @@
+---
+title: "Exploração de dados"
+format: html
+---
+
+# Pacotes e dados
+
+```{r}
+
+library(rio)
+library(tidyverse)
+
+dados <- import_list("examples_data.xlsx")
+
+```
+
+# Pivotagem
+
+```{r}
+
+df <- dados$df3  # Seleciona o elemento df3 do objeto dados e armazena em df.
+
+dflong <- 
+df |> 
+  pivot_longer(
+    cols = ALT_ESP_I:ALT_PLANT_III, # Seleciona as colunas que serão transformadas em linhas.
+    names_to = "FATORES",           # Nome da coluna que receberá os nomes das colunas originais.
+    values_to = "VALORES"           # Nome da coluna que receberá os valores originais.
+  ) |> 
+  separate_wider_delim(
+    cols = FATORES,                 # Coluna cujos conteúdos serão separados.
+    delim = "_",                    # Delimitador utilizado para separar os nomes.
+    names = c("V1", "V2", "BLOCO")  # Nomes das três colunas resultantes da separação.
+  ) |> 
+  unite(
+    "VARIAVEL", V1, V2              # Junta V1 e V2 numa única coluna chamada VARIAVEL.
+  ) |> 
+  pivot_wider(
+    names_from = VARIAVEL,          # Usa os valores de VARIAVEL como nomes de novas colunas.
+    values_from = VALORES           # Preenche as novas colunas com os valores de VALORES.
+  )
+
+```
+
+
+## Uso prático do pivot_longer()
+
+```{r}
+
+dfggplot <- 
+dflong |>
+  mutate(ALT_CM = ALT_PLANT * 100) |> 
+  pivot_longer(
+    cols = ALT_ESP:ALT_CM,
+    names_to = "VARIAVEL",
+    values_to = "VALOR"
+  )
+
+ggplot(dfggplot, aes(x = HIBRIDO, y = VALOR)) +
+  geom_boxplot() +
+  facet_wrap(~VARIAVEL,
+             scales = "free_y")
+
+```
+
+
+
+## Aplicando ao desafio
+
+```{r}
+
+graos <- import("graos.csv")
+
+graos_limpo <- 
+graos |> 
+  select(img, length, width) |> 
+  separate_wider_delim(img,
+                       delim = "_",
+                       names = "img",
+                       too_many = "drop") |> 
+  filter(width < 0.35, width > 0.1)
+
+ggplot(graos_limpo, aes(x = width)) +
+  geom_histogram()
+
+```
+
+
+

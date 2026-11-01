@@ -1,0 +1,113 @@
+---
+title: "Dados e gráficos"
+format: html
+---
+
+# Pacotes e importação de dados
+
+```{r}
+
+library(rio)
+library(tidyverse)
+
+# importar a primeira aba (padrão)
+
+df1 <- import("examples_data.xlsx")
+
+# importar um aba especifica
+
+feijao <- import("examples_data.xlsx", sheet = "feijao")
+
+#importar todas as abas
+
+dados <- import_list("examples_data.xlsx")
+
+```
+
+
+# Dados messy (desarrumados)
+
+```{r}
+
+messy <- dados$messy
+
+limpaespacoenponto <- function(nomes){str_replace(tolower(nomes), pattern = "\\s|\\.", "")}
+
+unique(messy$Gen)
+
+tidy <- 
+messy |> 
+  rename_with(.fn = limpaespacoenponto) |> 
+  fill(env) |> 
+  pivot_longer(cols = b1:b3, 
+               names_to = "bloco",
+               values_to = "ap") |> 
+  mutate(gen = factor(gen, levels = unique(messy$Gen)))
+
+```
+
+# Exploração grafica
+
+## Histograma
+
+```{r}
+
+histbase <- 
+ggplot(tidy, aes(x = ap, fill = env)) +
+  geom_histogram(bins = 10) +
+  facet_wrap(~env) +
+  # alterar os intervalos
+  scale_x_continuous(breaks = seq(1.5, 3, by = 0.25)) +
+  labs(x = "Altura da planta (m)",
+       y = "Número de plantas")
+# uma cor para cada ambiente
+ggplot(tidy, aes(x = ap, fill = env)) +
+  geom_histogram(bins = 10, alpha = 0.6) +
+  # alterar os intervalos
+  scale_x_continuous(breaks = seq(1.5, 3, by = 0.25)) +
+  # trocar cor
+  scale_fill_manual(values = c("darkblue", "forestgreen"))
+  labs(x = "Altura da planta (m)",
+       y = "Número de plantas")
+
+# um painel para cada ambiente
+  histbase +
+    facet_wrap(~env)
+  
+```
+
+## Boxplot
+
+```{r}
+
+# um boxplot para cada ambiente
+
+boxbase <- 
+ggplot(tidy, aes(x = env, y = ap)) +
+  geom_boxplot() +
+  geom_jitter() +
+  stat_summary(fun = mean,
+               geom = "point",
+               shape = 17,
+               size = 3,
+               color = "red")    
+
+# um painel para cada hibrido e ambiente
+
+ggplot(tidy, aes(y = ap)) +
+  geom_boxplot() +
+  facet_grid(env ~ gen) +
+  theme_sub_axis_x(text = element_blank(),
+                   ticks = element_blank()) +
+  theme_sub_panel(grid.major.x = element_blank(),
+                  grid.minor.x = element_blank())
+
+ggsave("boxplot.jpg",
+       width = 10,
+       height = 5)  
+
+```
+
+
+
+

@@ -1,17 +1,3 @@
-project:
-  type: website
-  output-dir: docs
-
-website:
-  title: "Desafio R 2026"
-  navbar:
-    left:
-      - href: index.qmd
-        text: Home
-      - about.qmd
-      - desafio_2026.qmd
-      - solucao.qmd
-
 format:
   html:
     theme:
@@ -22,4 +8,56 @@ format:
 
 editor: source
 
+
+
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Desafio R 2026"
+  description: "Apontamentos e desafio introduçao à programação em R"
+  site-url: "https://duvierj.github.io/Desafio2026/"
+  repo-url: "https://github.com/DuvierJ/Desafio2026"
+  repo-actions: [edit, issue]
+
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: Sobre
+      - text: Aulas
+        menu:
+          - href: aula1.qmd
+            text: "Aula 1 — Introdução ao Rstudio"
+          - href: aula2.qmd
+            text: "Aula 2 — Tipos de dados"
+          - href: aula3.qmd
+            text: "Aula 3 — Dados"
+          - href: aula4.qmd
+            text: "Aula 4 — Exploração de dados"
+          - href: aula5.qmd
+            text: "Aula 5 — Seleção e filtragem"
+          - href: aula6.qmd
+            text: "Aula 6 — Mutação e resumo"
+      - text: Desafio 2026
+        menu:
+          - href: desafio_2026.qmd
+            text: "Orientações"
+          - href: solucao.qmd
+            text: "Solução"
+    right:
+      - icon: github
+        href: "https://github.com/DuvierJ/Desafio2026"
+        aria-label: GitHub
+
+  page-footer:
+    left: "© 2026 Desafio R — Todos os direitos reservados"
+    center: "Feito com [Quarto](https://quarto.org)"
+    right:
+      - icon: github
+        href: "https://github.com/DuvierJ/Desafio2026"
 

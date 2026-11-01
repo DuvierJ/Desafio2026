@@ -1,11 +1,7 @@
 ---
-title: "About"
+title: "Sobre"
 ---
 
-About this site
+Este site foi desenvolvido como resultado do processo de aprendizagem da disciplina RGV410046-41000997DO/ME (20262) - Tópicos Especiais: Introdução à Linguagem R de Programação, da universidade Federal de Santa Catarina. Aqui, são reunidos os scripts construídos ao longo da disciplina que constituem um registro do conteúdo abordado nas aulas. Além disso, encontra-se o desafio final proposto como atividade avaliativa da disciplina, na qual são aplicados os conceitos e ferramentas estudadas na resolução de um problema da área das ciências agrárias.
 
-Neste site, encontram-se os ressultados das atividades dessenvolvidas na disciplina R.....
 
-```{r}
-1 + 1
-```

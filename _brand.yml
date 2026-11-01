@@ -1,0 +1,56 @@
+meta:
+  name: "Desafio R 2026"
+  link:
+    home: https://duvierj.github.io/Desafio2026/
+    github: https://github.com/DuvierJ/Desafio2026
+
+logo:
+  small: images/logo-small.png      # 200x200px, aparece na navbar
+  medium: images/logo-medium.png    # 800x400px, cabeçalhos
+  large: images/logo-large.png      # 1600x800px, capa
+
+color:
+  palette:
+    # Azul-petróleo profundo = confiança + tecnologia (inspiração: RStudio/Posit)
+    primary: "#1B4F72"
+    secondary: "#2E86AB"
+    accent: "#F39C12"        # laranja quente (destaque de CTA)
+    success: "#27AE60"
+    warning: "#E67E22"
+    danger: "#C0392B"
+    dark: "#1C2833"
+    light: "#F4F6F7"
+    foreground: "#212F3C"
+    background: "#FFFFFF"
+  primary: primary
+  secondary: secondary
+  tertiary: accent
+  success: success
+  info: secondary
+  warning: warning
+  danger: danger
+  light: light
+  dark: dark
+
+typography:
+  fonts:
+    - family: "Inter"
+      source: google
+      weight: [300, 400, 500, 600, 700]
+    - family: "JetBrains Mono"
+      source: google
+      weight: [400, 500]
+  base:
+    family: "Inter"
+    size: 17px
+    line-height: 1.65
+  headings:
+    family: "Inter"
+    weight: 600
+    color: dark
+  monospace:
+    family: "JetBrains Mono"
+    size: 0.92em
+  link:
+    color: secondary
+    decoration: none

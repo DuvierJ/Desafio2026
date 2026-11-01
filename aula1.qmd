@@ -1,0 +1,84 @@
+---
+title: "Introdução ao Rstudio"
+format: html
+---
+
+# Tipos de script
+
+Na linguagem R de programação os principais tipos principais de scritps são o R Scripts (.r) e Quarto (.qmd). Os R Scripts são arquivos de texto simples que contém comandos e comentários unicamente enquanto os arquivos quarto permitem combinar códigos de R e texto explicativo, que pode ser formatado de maneira similar aos arquivos word.
+
+# Incluido código
+
+Para escrever códigos nos arquivos quarto é necessario criar um bloco de códigos, que pode ser inserido com o atalho: ctrl + Alt + I
+
+```{r}
+# dentro dos blocos para escrever comentários é necessario usar o "#"
+
+
+```
+
+# Objetos
+
+No R os objetos são estruturas que armazenam dados como números, texto, tabelas ou gráficos que podem ser utilizados posteriormente.
+
+```{r}
+
+numero <- 2
+
+numero * 10
+
+vetor <- c(40, 20, 60, 80)
+
+vetor*10
+
+```
+
+
+# Funções
+
+As funções são objetos que executam tarefas específicas, funcionam a partir de uma entrada (argumentos), processamento dessas informações e retornam um resultado 
+
+```{r}
+# Criando uma função para criar uma mediana de um conjunto
+
+x <- c (5, 10, 15, 8, 6, 40, 35, 10, 2, 4)
+
+# x é o único argumento da função
+minha_mediana <- function(x) { 
+  n <- length(x)
+  resto <- n %% 2
+# checar se é par ou impar
+  if (resto == 0) {
+#aqui vai ser mediana par
+    xord <- sort(x)
+    centro <- xord[(n/2):(n/2+1)]
+    mean(centro)
+  } else { 
+# aqui vai ser mediana impar
+    xord <- sort(x)
+    xord [(n+1)/2]
+  }
+}
+
+# função com três elementos
+
+eleva <- function(x, potencia = 2, texto = "quadrado"){
+  resultado <- x ^ potencia
+  if (length(x) == 1 ) {
+    paste("O", texto, "de", x, "é", resultado)
+  } else {
+    return(resultado)
+  }
+}
+
+eleva (4, 3, "cubo")
+eleva (x = 4)
+
+```
+
+
+
+
+
+
+
